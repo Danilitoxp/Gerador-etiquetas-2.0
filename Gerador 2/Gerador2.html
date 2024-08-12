@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Etiquetas</title>
+    <link rel="stylesheet" href="/Tela Inicial/Gerador.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <main>
+        <a class="voltar" href="/Tela Inicial/index.html">
+            <button>Voltar</button>
+        </a>
+
+        <div class="container">
+            <section class="formulario">
+                <form action="">
+                    <div class="descricao">
+                        <label for="descricao">Coloque a Descrição do produto</label>
+                        <input id="descricao" type="text">
+                    </div>
+                
+                    <div class="separacao">
+                        <div class="imagem">
+                            <label for="imagemUpload" class="upload-label">
+                                <i class='bx bxs-cloud-upload'></i>
+                                <input type="file" id="imagemUpload" class="upload-input" accept="image/*">
+                            </label>
+                        </div>
+                        
+
+                        <div class="fornecedor">
+                            <select name="fornecedores" id="fornecedores">
+                                <option value="" data-image="/assets/images/Amanco.svg">Amanco</option>
+                                <option value="">Fortlev</option>
+                                <option value="">Elgin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="previewEtiqueta">
+                        <label for="previewEtiqueta">Preview da Etiqueta</label>
+                        <img id="previewEtiqueta" src="/assets/images/PADRÕES/MODELO 2.png" alt="Preview da Etiqueta">
+                    </div>
+                    <button class="enviar">Adicionar Etiqueta</button>
+                </form>
+            </section>
+
+            <section class="A4">
+                <div class="folha"></div>
+                <button>Baixar PDF</button>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

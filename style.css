@@ -1,0 +1,147 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #f0f0f0; /* Adiciona uma cor de fundo leve */
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide a tela em duas colunas iguais */
+  height: 100vh;
+}
+
+.imagem {
+  background-color: #00427a;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Alinha o conteúdo verticalmente */
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.imagem img {
+  width: 80%;
+  max-width: 300px;
+  padding-top: 20px;
+  margin: 10px 0;
+}
+
+.imagem p {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.imagem h2 {
+  font-size: 38px;
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
+.imagem p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.imagem button {
+  background-color: rgb(255, 153, 0);
+  border-radius: 30px;
+  border: none;
+  padding: 0.5rem 2rem;
+  color: rgba(0, 0, 0, 0.904);
+  font-weight: bolder;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.imagem button:hover {
+  background-color: rgb(238, 255, 0);
+}
+
+.formulario {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formulario .modelos {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+}
+
+.formulario h2 {
+  color: rgba(0, 0, 0, 0.904);
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.formulario p {
+  color: #000000e7;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.formulario #Etiqueta1, .formulario #Etiqueta2 {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.formulario #Etiqueta1:hover, .formulario #Etiqueta2:hover {
+  transform: scale(1.01);
+  filter: brightness(1.5);
+}
+
+/* Consultas de mídia para telas menores */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr; /* Em telas menores, coloca as seções em uma única coluna */
+  }
+
+  .imagem, .formulario {
+    width: 100%;
+    height: auto; /* Ajusta a altura automaticamente */
+    text-align: center; /* Centraliza o texto */
+  }
+
+  .imagem img {
+    width: 90%;
+  }
+
+  .imagem h2 {
+    font-size: 24px;
+  }
+
+  .imagem p {
+    font-size: 16px;
+  }
+
+  .imagem button {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  .formulario h2 {
+    font-size: 24px;
+  }
+
+  .formulario p {
+    font-size: 16px;
+  }
+}

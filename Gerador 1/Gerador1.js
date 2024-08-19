@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        html2canvas(document.getElementById('previewEtiquetaContainer')).then(canvas => {
+        html2canvas(document.getElementById('previewEtiquetaContainer'), { scale: 2 }).then(canvas => {
             const imagem = canvas.toDataURL('image/png');
             const etiquetaBox = document.getElementById(`etiqueta${numEtiquetas + 1}`);
             
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Dimensões da etiqueta em mm
         const etiquetaWidth = 97.03; // Largura da etiqueta
-        const etiquetaHeight = 51.99; // Altura da etiqueta
+        const etiquetaHeight = 53.99; // Altura da etiqueta
 
         // Dimensões da página A4 em mm
         const pdfWidth = 210; // Largura da página A4
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calcular o offset horizontal e vertical
         const xOffset = (pdfWidth - totalWidth) / 2;
-        const yOffset = (pdfHeight - totalHeight) / 2 + margin; // Ajustar o offset vertical para reduzir o espaço inferior
+        const yOffset = (pdfHeight - totalHeight) / 2;
 
         let x = xOffset;
         let y = yOffset;

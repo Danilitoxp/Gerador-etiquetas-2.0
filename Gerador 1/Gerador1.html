@@ -11,7 +11,7 @@
 </head>
 <body>
     <main>
-        <a class="voltar" href="/Tela Inicial/index.html">
+        <a class="voltar" href="/index.html">
             <button>Voltar</button>
         </a>
 
@@ -31,7 +31,6 @@
                             </label>
                         </div>
                         
-
                         <div class="fornecedor">
                             <select name="fornecedores" id="fornecedores">
                                 <option value="Tramontina">Tramontina</option>
@@ -44,10 +43,10 @@
 
                     <div class="previewEtiqueta">
                         <label for="previewEtiqueta">Preview da Etiqueta</label>
-                        <div class="etiqueta-container">
+                        <div id="previewEtiquetaContainer" class="etiqueta-container">
                             <img id="previewEtiqueta" src="/assets/images/OPÇÕES 1/Tramontina.png" alt="Preview da Etiqueta">
+                            <div id="descricaoEtiqueta" class="descricao-etiqueta">Descrição do Produto</div>
                             <img id="uploadedImage" class="uploaded-image" src="" alt="Imagem Carregada" style="display: none;">
-                            <div id="descricaoEtiqueta" class="descricao-etiqueta" style="display: none;">Descrição do Produto</div>
                         </div>
                     </div>
                     
@@ -57,12 +56,25 @@
 
             <section class="A4">
                 <div class="folha">
-                    <div class="previewA4" id="previewA4"></div>
+                    <div class="previewA4" id="previewA4">
+                        <div id="etiqueta1" class="etiqueta-box"></div>
+                        <div id="etiqueta2" class="etiqueta-box"></div>
+                        <div id="etiqueta3" class="etiqueta-box"></div>
+                        <div id="etiqueta4" class="etiqueta-box"></div>
+                        <div id="etiqueta5" class="etiqueta-box"></div>
+                        <div id="etiqueta6" class="etiqueta-box"></div>
+                        <div id="etiqueta7" class="etiqueta-box"></div>
+                        <div id="etiqueta8" class="etiqueta-box"></div>
+                        <div id="etiqueta9" class="etiqueta-box"></div>
+                        <div id="etiqueta10" class="etiqueta-box"></div>
+                    </div>
                 </div>
-                <button>Baixar PDF</button>
+                <button id="baixarPDF">Baixar PDF</button>
             </section>
-            
         </div>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

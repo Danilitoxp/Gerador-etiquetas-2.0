@@ -36,22 +36,29 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 10; i++) {
             const etiquetaBox = document.getElementById(`etiqueta${i + 1}`);
             etiquetaBox.innerHTML = '';
-
+    
             if (etiquetas[i]) {
                 etiquetaBox.innerHTML = `
-                    <div class="etiqueta-content" id='deletar'>
+                    <div class="etiqueta-content" id='etiqueta-content-${i}'>
                         <img src="${etiquetas[i]}" alt="Etiqueta" style="width: 100%; height: auto;" />
                         <button class="delete-btn"><i class='bx bx-x'></i></button>
                     </div>`;
                 
                 // Adiciona o event listener para exclusão da etiqueta
                 etiquetaBox.querySelector('.delete-btn').addEventListener('click', () => {
-                    etiquetas.splice(i, 1); // Remove a etiqueta da lista
-                    renderizarEtiquetas(); // Re-renderiza as etiquetas
+                    const etiquetaContent = document.getElementById(`etiqueta-content-${i}`);
+                    etiquetaContent.classList.add('fade-out'); // Adiciona a animação de fade out
+    
+                    // Espera a animação terminar antes de remover a etiqueta
+                    setTimeout(() => {
+                        etiquetas.splice(i, 1); // Remove a etiqueta da lista
+                        renderizarEtiquetas(); // Re-renderiza as etiquetas
+                    }, 500); // Tempo deve ser igual ao tempo da animação de fade out
                 });
             }
         }
     };
+    
 
     const adicionarEtiqueta = (event) => {
         event.preventDefault();

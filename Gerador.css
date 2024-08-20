@@ -196,6 +196,12 @@
   object-fit: cover;
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+
 .descricao-etiqueta {
   position: absolute;
   top: 70px; /* Ajuste conforme necessário */
@@ -370,24 +376,28 @@ img#uploadedImage {
     position: relative;
 }
 
-.delete-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: red;
-    font-size: 18px;
+/* Estilizando o botão de deletar dentro de qualquer contêiner com a classe 'etiqueta-content' */
+.etiqueta-content .delete-btn {
+  background-color: transparent; /* Exemplo de cor de fundo */
+  color: #00427a; /* Exemplo de cor do texto */
+  border: none; /* Remover borda */
+  position: absolute;
+  left: 89px;
+  top: 1px;
+  cursor: pointer; /* Cursor pointer para indicar que é clicável */
+  font-size: 20px;
 }
 
-.delete-btn i {
-    font-size: 20px;
-    font-weight: 500;
+.etiqueta-content .delete-btn:hover {
+  background-color: transparent;
+  padding: 0;
 }
 
+/* Adicione mais regras conforme necessário */
 
-#deletar button {
+
+
+#etiqueta-content button {
   width: 20px;
   height: 20px;
   color: #00427a;

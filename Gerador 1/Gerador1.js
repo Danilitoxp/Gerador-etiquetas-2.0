@@ -34,22 +34,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const adicionarEtiqueta = (event) => {
         event.preventDefault();
-
+    
         if (numEtiquetas >= 10) {
             alert('Você atingiu o limite de 10 etiquetas.');
             return;
         }
-
+    
         html2canvas(document.getElementById('previewEtiquetaContainer'), { scale: 2 }).then(canvas => {
             const imagem = canvas.toDataURL('image/png');
             const etiquetaBox = document.getElementById(`etiqueta${numEtiquetas + 1}`);
             
             if (etiquetaBox) {
-                etiquetaBox.innerHTML = `<img src="${imagem}" alt="Etiqueta" style="width: 100%; height: auto;" />`;
+                etiquetaBox.innerHTML = `
+                    <div class="etiqueta-content" id='deletar'>
+                        <img src="${imagem}" alt="Etiqueta" style="width: 100%; height: auto;" />
+                        <button class="delete-btn"><i class='bx bx-x'></i></button>
+                    </div>`;
                 numEtiquetas++;
+                
+                // Adiciona o event listener para exclusão da etiqueta
+                etiquetaBox.querySelector('.delete-btn').addEventListener('click', () => {
+                    etiquetaBox.innerHTML = ''; // Remove o conteúdo da etiqueta
+                    numEtiquetas--; // Decrementa o contador de etiquetas
+                });
             }
         });
     };
+    
 
     const baixarPDF = () => {
         const { jsPDF } = window.jspdf;

@@ -365,3 +365,37 @@ img#uploadedImage {
   .previewA4 {
     height: 100%;
   }
+  
+  .etiqueta-content {
+    position: relative;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+}
+
+.delete-btn i {
+    font-size: 20px;
+}
+
+
+#deletar button {
+  width: 20px;
+  height: 20px;
+  color: #f1f1f1;
+  position: absolute;
+  border-radius: 0px;
+  top: 10px;
+  left: 180px;
+}
+
+#deletar button:hover {
+  background-color: #00427a;
+}

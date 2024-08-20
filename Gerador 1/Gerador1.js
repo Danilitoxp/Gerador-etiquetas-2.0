@@ -55,18 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const adicionarEtiqueta = (event) => {
         event.preventDefault();
-    
+        
         if (etiquetas.length >= 10) {
             alert('Você atingiu o limite de 10 etiquetas.');
             return;
         }
     
+        // Atualiza a descrição com base no input
+        const descricaoTexto = descricaoInput.value.trim();
+        if (!descricaoTexto) {
+            descricaoEtiqueta.textContent = `Etiqueta N° ${etiquetas.length + 1}`;
+        } else {
+            descricaoEtiqueta.textContent = descricaoTexto;
+        }
+    
+        // Gerar a imagem da etiqueta
         html2canvas(document.getElementById('previewEtiquetaContainer'), { scale: 2 }).then(canvas => {
             const imagem = canvas.toDataURL('image/png');
             etiquetas.push(imagem); // Adiciona a imagem da etiqueta à lista
             renderizarEtiquetas(); // Re-renderiza as etiquetas
         });
     };
+    
 
     const baixarPDF = () => {
         const { jsPDF } = window.jspdf;

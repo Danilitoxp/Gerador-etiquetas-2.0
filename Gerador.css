@@ -345,7 +345,7 @@ img#uploadedImage {
     width: 89%; /* Ajuste a largura conforme necessário */
     height: 70px;
     text-align: center;
-    font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 19px; /* Ajuste o tamanho da fonte conforme necessário */
     font-weight: bold;
     text-transform: uppercase;
     padding: 5px;
@@ -394,10 +394,10 @@ img#uploadedImage {
   background-color: transparent;
   position: absolute;
   border-radius: 0px;
-  top: 10px;
-  left: 178px;
+  top: 11px;
+  left: 177px;
 }
 
 #deletar button:hover {
-  background-color: #00427a;
+  background-color: transparent;
 }

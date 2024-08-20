@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const descricaoEtiqueta = document.getElementById('descricaoEtiqueta');
     const adicionarEtiquetaBtn = document.querySelector('.enviar');
     const baixarPDFBtn = document.getElementById('baixarPDF');
-    let numEtiquetas = 0;
+    let etiquetas = [];
 
     const atualizarLogoFornecedor = () => {
         const selectedFornecedor = fornecedoresSelect.value;
@@ -32,93 +32,89 @@ document.addEventListener('DOMContentLoaded', () => {
         descricaoEtiqueta.style.display = descricaoTexto ? 'block' : 'none';
     };
 
+    const renderizarEtiquetas = () => {
+        for (let i = 0; i < 10; i++) {
+            const etiquetaBox = document.getElementById(`etiqueta${i + 1}`);
+            etiquetaBox.innerHTML = '';
+
+            if (etiquetas[i]) {
+                etiquetaBox.innerHTML = `
+                    <div class="etiqueta-content" id='deletar'>
+                        <img src="${etiquetas[i]}" alt="Etiqueta" style="width: 100%; height: auto;" />
+                        <button class="delete-btn"><i class='bx bx-x'></i></button>
+                    </div>`;
+                
+                // Adiciona o event listener para exclusão da etiqueta
+                etiquetaBox.querySelector('.delete-btn').addEventListener('click', () => {
+                    etiquetas.splice(i, 1); // Remove a etiqueta da lista
+                    renderizarEtiquetas(); // Re-renderiza as etiquetas
+                });
+            }
+        }
+    };
+
     const adicionarEtiqueta = (event) => {
         event.preventDefault();
     
-        if (numEtiquetas >= 10) {
+        if (etiquetas.length >= 10) {
             alert('Você atingiu o limite de 10 etiquetas.');
             return;
         }
     
         html2canvas(document.getElementById('previewEtiquetaContainer'), { scale: 2 }).then(canvas => {
             const imagem = canvas.toDataURL('image/png');
-            const etiquetaBox = document.getElementById(`etiqueta${numEtiquetas + 1}`);
-            
-            if (etiquetaBox) {
-                etiquetaBox.innerHTML = `
-                    <div class="etiqueta-content" id='deletar'>
-                        <img src="${imagem}" alt="Etiqueta" style="width: 100%; height: auto;" />
-                        <button class="delete-btn"><i class='bx bx-x'></i></button>
-                    </div>`;
-                numEtiquetas++;
-                
-                // Adiciona o event listener para exclusão da etiqueta
-                etiquetaBox.querySelector('.delete-btn').addEventListener('click', () => {
-                    etiquetaBox.innerHTML = ''; // Remove o conteúdo da etiqueta
-                    numEtiquetas--; // Decrementa o contador de etiquetas
-                });
-            }
+            etiquetas.push(imagem); // Adiciona a imagem da etiqueta à lista
+            renderizarEtiquetas(); // Re-renderiza as etiquetas
         });
     };
-    
 
     const baixarPDF = () => {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF('p', 'mm', 'a4');
-
+    
         // Dimensões da etiqueta em mm
         const etiquetaWidth = 97.03; // Largura da etiqueta
         const etiquetaHeight = 53.99; // Altura da etiqueta
-
+    
         // Dimensões da página A4 em mm
         const pdfWidth = 210; // Largura da página A4
         const pdfHeight = 297; // Altura da página A4
-
+    
         // Margens e espaçamento
-        const margin = 0; // Margem ao redor da etiqueta
         const etiquetaSpacing = 5; // Espaçamento entre etiquetas
-
+    
         // Número de etiquetas por linha e coluna
         const etiquetasPorLinha = 2;
         const etiquetasPorColuna = 5;
-
-        // Calcular o espaço disponível para centralizar horizontalmente
-        const totalWidth = etiquetasPorLinha * etiquetaWidth + (etiquetasPorLinha - 1) * etiquetaSpacing;
-        const totalHeight = etiquetasPorColuna * etiquetaHeight + (etiquetasPorColuna - 1) * etiquetaSpacing;
-
+    
         // Calcular o offset horizontal e vertical
-        const xOffset = (pdfWidth - totalWidth) / 2;
-        const yOffset = (pdfHeight - totalHeight) / 2;
-
+        const xOffset = (pdfWidth - (etiquetasPorLinha * etiquetaWidth + (etiquetasPorLinha - 1) * etiquetaSpacing)) / 2;
+        const yOffset = (pdfHeight - (etiquetasPorColuna * etiquetaHeight + (etiquetasPorColuna - 1) * etiquetaSpacing)) / 2;
+    
         let x = xOffset;
         let y = yOffset;
-
-        for (let i = 1; i <= numEtiquetas; i++) {
-            const etiquetaBox = document.getElementById(`etiqueta${i}`);
-            if (etiquetaBox && etiquetaBox.querySelector('img')) {
-                const imgData = etiquetaBox.querySelector('img').src;
-
-                // Adicionar etiqueta ao PDF
-                pdf.addImage(imgData, 'PNG', x, y, etiquetaWidth, etiquetaHeight);
-
-                // Atualizar posição para a próxima etiqueta
-                if (i % etiquetasPorLinha === 0) {
-                    x = xOffset;
-                    y += etiquetaHeight + etiquetaSpacing;
-                } else {
-                    x += etiquetaWidth + etiquetaSpacing;
-                }
-
-                // Adicionar nova página se necessário
-                if (i % (etiquetasPorLinha * etiquetasPorColuna) === 0 && i < numEtiquetas) {
-                    pdf.addPage();
-                    x = xOffset;
-                    y = yOffset;
-                }
+    
+        etiquetas.forEach((imgData, index) => {
+            pdf.addImage(imgData, 'PNG', x, y, etiquetaWidth, etiquetaHeight);
+    
+            // Atualizar posição para a próxima etiqueta
+            if ((index + 1) % etiquetasPorLinha === 0) {
+                x = xOffset;
+                y += etiquetaHeight + etiquetaSpacing;
+            } else {
+                x += etiquetaWidth + etiquetaSpacing;
             }
-        }
-
+    
+            // Adicionar nova página se necessário
+            if ((index + 1) % (etiquetasPorLinha * etiquetasPorColuna) === 0 && index < etiquetas.length - 1) {
+                pdf.addPage();
+                x = xOffset;
+                y = yOffset;
+            }
+        });
+    
         pdf.save('etiquetas.pdf');
+        window.location.reload();
     };
 
     fornecedoresSelect.addEventListener('change', atualizarLogoFornecedor);

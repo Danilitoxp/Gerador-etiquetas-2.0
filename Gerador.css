@@ -383,17 +383,19 @@ img#uploadedImage {
 
 .delete-btn i {
     font-size: 20px;
+    font-weight: 500;
 }
 
 
 #deletar button {
   width: 20px;
   height: 20px;
-  color: #f1f1f1;
+  color: #00427a;
+  background-color: transparent;
   position: absolute;
   border-radius: 0px;
   top: 10px;
-  left: 180px;
+  left: 178px;
 }
 
 #deletar button:hover {

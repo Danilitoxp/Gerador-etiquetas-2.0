@@ -369,13 +369,13 @@ img#uploadedImage {
 /* Estilizando o botão de deletar dentro de qualquer contêiner com a classe 'etiqueta-content' */
 .etiqueta-content .delete-btn {
   background-color: transparent; /* Exemplo de cor de fundo */
-  color: #00427a; /* Exemplo de cor do texto */
+  color: red; /* Exemplo de cor do texto */
   border: none; /* Remover borda */
   position: absolute;
-  left: 89px;
-  top: 1px;
+  left: 91px;
+  top: -2.5px;
   cursor: pointer; /* Cursor pointer para indicar que é clicável */
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .etiqueta-content .delete-btn:hover {

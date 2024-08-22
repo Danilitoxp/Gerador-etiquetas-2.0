@@ -322,17 +322,15 @@ img#uploadedImage {
   }
   
   .A4 button {
-    position: absolute;
-    bottom: 35px;
-    width: 50px;
+    width: 100%;
     max-width: 400px; /* Limita a largura máxima do botão de baixar PDF */
     height: 40px;
+    background-color: #00427a;
     border: none;
-    color: #00427a;
+    color: white;
     font-size: 15px;
     border-radius: 20px;
     font-weight: 500;
-    background-color: transparent;
     cursor: pointer;
   }
 
@@ -341,7 +339,7 @@ img#uploadedImage {
   }
 
   .A4 button i {
-    font-size: 30px;
+    font-size: 20px;
   }
   
 
@@ -386,11 +384,11 @@ img#uploadedImage {
 /* Estilizando o botão de deletar dentro de qualquer contêiner com a classe 'etiqueta-content' */
 .etiqueta-content .delete-btn {
   background-color: transparent; /* Exemplo de cor de fundo */
-  color: #00427a; /* Exemplo de cor do texto */
+  color: red; /* Exemplo de cor do texto */
   border: none; /* Remover borda */
   position: absolute;
-  left: 160px;
-  top: 4px;
+  left: 88px;
+  top: 2px;
   cursor: pointer; /* Cursor pointer para indicar que é clicável */
   font-size: 18px;
 }

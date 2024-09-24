@@ -5,27 +5,30 @@
 }
 
 body {
-  font-family: "inter", sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-color: #f0f0f0; /* Adiciona uma cor de fundo leve */
+  background-color: #f0f0f0;
 }
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Divide a tela em duas colunas iguais */
+  grid-template-columns: 1fr 1fr;
   height: 100vh;
+}
+
+.imagem-link {
+  text-align: center;
 }
 
 .imagem {
   background-color: #00427a;
   height: 100vh;
-  width: 100%;
   display: flex;
-  flex-direction: column; /* Alinha o conteúdo verticalmente */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
@@ -34,13 +37,7 @@ main {
 .imagem img {
   width: 80%;
   max-width: 300px;
-  padding-top: 20px;
   margin: 10px 0;
-}
-
-.imagem p {
-  text-align: center;
-  padding: 0 1rem;
 }
 
 .imagem h2 {
@@ -52,6 +49,8 @@ main {
 .imagem p {
   font-size: 20px;
   margin-bottom: 20px;
+  text-align: center;
+  padding: 0 1rem;
 }
 
 .imagem button {
@@ -70,7 +69,6 @@ main {
 }
 
 .formulario {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,9 +76,12 @@ main {
 }
 
 .formulario .modelos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 550px;
-  height: auto;
 }
 
 .formulario h2 {
@@ -96,52 +97,84 @@ main {
   margin-bottom: 30px;
 }
 
-.formulario #Etiqueta1, .formulario #Etiqueta2 {
+.carousel-container {
+  width: 100%;
+  overflow: hidden; /* Esconde as imagens fora da área visível */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#prev-btn, #next-btn {
+  background: none;
+  z-index: 1;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: #00427a;
+  position: absolute;
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Corrige o posicionamento no centro vertical */
+}
+
+#prev-btn {
+  left: 10px; /* Ajusta a posição do botão anterior à esquerda */
+}
+
+#next-btn {
+  right: 10px; /* Ajusta a posição do botão próximo à direita */
+}
+
+#prev-btn:hover, #next-btn:hover {
+  color: #ff9900; /* Cor do botão ao passar o mouse */
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  transition: transform 0.5s ease; /* Animação suave ao mover as imagens */
+  width: 100%; /* Garante que o carrossel ocupe o espaço total */
+}
+
+.carousel a {
+  min-width: 100%; /* Exibe apenas uma imagem por vez */
+  transition: transform 0.5s ease;
+}
+
+.carousel img {
   width: 100%;
   max-width: 450px;
-  margin-bottom: 20px;
+  margin: 0 10px;
   cursor: pointer;
 }
 
-.formulario #Etiqueta1:hover, .formulario #Etiqueta2:hover {
-  transform: scale(1.01);
-  filter: brightness(1.5);
+
+
+.imagem-link {
+  pointer-events: none; /* Desativa cliques */
 }
 
-/* Consultas de mídia para telas menores */
+.imagem-link.clicavel {
+  pointer-events: auto; /* Reativa cliques apenas nesta classe */
+}
+
+
+#prev-btn:hover, #next-btn:hover {
+  color: #ff9900;
+}
+
 @media (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr; /* Em telas menores, coloca as seções em uma única coluna */
-  }
-
-  .imagem, .formulario {
-    width: 100%;
-    height: auto; /* Ajusta a altura automaticamente */
-    text-align: center; /* Centraliza o texto */
-  }
-
-  .imagem img {
-    width: 90%;
-  }
-
   .imagem h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
-
   .imagem p {
-    font-size: 16px;
+    font-size: 18px;
   }
-
   .imagem button {
-    width: 90%;
-    font-size: 16px;
+    font-size: 18px;
   }
-
-  .formulario h2 {
-    font-size: 24px;
-  }
-
   .formulario p {
-    font-size: 16px;
+    margin-bottom: 20px;
   }
 }

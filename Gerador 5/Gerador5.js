@@ -1,20 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const previewEtiqueta = document.getElementById('previewEtiqueta');
-    const letraPrateleira = document.getElementById('letraPrateleira'); // Corrigido para pegar o select
+    const numeroPrateleira = document.getElementById('numeroPrateleira');
     const descricaoEtiqueta = document.getElementById('descricaoEtiqueta');
     const adicionarEtiquetaBtn = document.querySelector('.enviar');
     const baixarPDFBtn = document.getElementById('baixarPDF');
     let etiquetas = [];
 
     const atualizarDescricaoEtiqueta = () => {
-        const descricaoTexto = letraPrateleira.value.trim();
+        const descricaoTexto = numeroPrateleira.value.trim();
         descricaoEtiqueta.textContent = descricaoTexto || '';
         descricaoEtiqueta.style.display = descricaoTexto ? 'block' : 'none';
-    
-        // Para garantir que o layout não mude, você pode manter a altura da descrição estável.
+
         descricaoEtiqueta.style.height = "100px"; // Ajuste conforme o tamanho do texto que você deseja
     };
-    
 
     const renderizarEtiquetas = () => {
         for (let i = 0; i < 10; i++) {
@@ -23,17 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (etiquetas[i]) {
                 etiquetaBox.innerHTML = `
-                    <div class="etiqueta-content" id='etiqueta-content-${i}'>
+                    <div class="etiqueta-content etiqueta-deitada" id='etiqueta-content-${i}'>
                         <img src="${etiquetas[i]}" alt="Etiqueta" style="width: 100%; height: auto;" />
                         <button class="delete-btn"><i class='bx bx-x'></i></button>
                     </div>`;
-
-                // Adiciona o event listener para exclusão da etiqueta
+                
                 etiquetaBox.querySelector('.delete-btn').addEventListener('click', () => {
                     const etiquetaContent = document.getElementById(`etiqueta-content-${i}`);
                     etiquetaContent.classList.add('fade-out'); // Adiciona a animação de fade out
 
-                    // Espera a animação terminar antes de remover a etiqueta
                     setTimeout(() => {
                         etiquetas.splice(i, 1); // Remove a etiqueta da lista
                         renderizarEtiquetas(); // Re-renderiza as etiquetas
@@ -46,15 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const adicionarEtiqueta = (event) => {
         event.preventDefault();
 
-        if (etiquetas.length >= 3) {
-            alert('Você atingiu o limite de 3 etiquetas.');
+        if (etiquetas.length >= 2) { // Limite de 2 etiquetas
+            alert('Você atingiu o limite de 2 etiquetas.');
             return;
         }
 
         // Atualiza a descrição com base no input
-        const descricaoTexto = letraPrateleira.value.trim();
+        const descricaoTexto = numeroPrateleira.value.trim();
         descricaoEtiqueta.textContent = descricaoTexto || `Etiqueta N° ${etiquetas.length + 1}`;
-
+        
         // Gerar a imagem da etiqueta
         html2canvas(document.getElementById('previewEtiquetaContainer'), { scale: 2 }).then(canvas => {
             const imagem = canvas.toDataURL('image/png');
@@ -68,46 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const pdf = new jsPDF('p', 'mm', 'a4');
     
         // Dimensões da etiqueta em mm
-        const etiquetaWidth = 149.91; // Largura da etiqueta
-        const etiquetaHeight = 69.94; // Altura da etiqueta
+        const etiquetaWidth = 146; // Largura da etiqueta
+        const etiquetaHeight = 140; // Altura da etiqueta (ajustado para caber duas)
     
         // Dimensões da página A4 em mm
         const pdfWidth = 210; // Largura da página A4
         const pdfHeight = 297; // Altura da página A4
     
         // Margens e espaçamento
-        const etiquetaSpacing = 10; // Espaçamento entre etiquetas
+        const etiquetaSpacing = 0; // Espaçamento entre etiquetas
+        const xOffset = (pdfWidth - etiquetaWidth) / 2; // Centralizar horizontalmente
     
-        // Número de etiquetas por linha e coluna
-        const etiquetasPorLinha = 1; // Apenas 1 etiqueta por linha
-        const etiquetasPorColuna = 3; // Apenas 3 etiquetas por folha (colunas)
-    
-        // Calcular o offset horizontal e vertical
-        const xOffset = (pdfWidth - etiquetaWidth) / 2; // Centralizar etiqueta horizontalmente
-        const yOffset = 20; // Definir margem superior
-    
-        let x = xOffset;
-        let y = yOffset;
+        let x = xOffset; // Posição x
+        let y = 10; // Posição y inicial (margem superior)
     
         etiquetas.forEach((imgData, index) => {
+            // Verifica se a próxima etiqueta ultrapassa os limites da página
+            if (y + etiquetaHeight > pdfHeight) {
+                pdf.addPage(); // Adiciona nova página
+                y = 10; // Reiniciar y para o topo da nova página
+            }
+    
+            // Adiciona a imagem da etiqueta
             pdf.addImage(imgData, 'PNG', x, y, etiquetaWidth, etiquetaHeight);
     
-            // Atualizar posição para a próxima etiqueta
-            y += etiquetaHeight + etiquetaSpacing;
-    
-            // Adicionar nova página se necessário
-            if ((index + 1) % etiquetasPorColuna === 0 && index < etiquetas.length - 1) {
-                pdf.addPage();
-                x = xOffset;
-                y = yOffset;
-            }
+            // Atualizar y para a próxima etiqueta (uma abaixo da outra)
+            y += etiquetaHeight + etiquetaSpacing; // Mover para a próxima posição vertical
         });
     
         pdf.save('etiquetas.pdf');
     };
     
-
-    letraPrateleira.addEventListener('input', atualizarDescricaoEtiqueta);
+    numeroPrateleira.addEventListener('input', atualizarDescricaoEtiqueta);
     adicionarEtiquetaBtn.addEventListener('click', adicionarEtiqueta);
     baixarPDFBtn.addEventListener('click', baixarPDF);
 });

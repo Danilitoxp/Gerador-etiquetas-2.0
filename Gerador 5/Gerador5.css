@@ -38,29 +38,19 @@ main {
 }
 
 .previewA4 {
+  justify-content: center;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  justify-content: center; /* Centraliza o grid dentro do contêiner pai */
-  justify-items: center; /* Centraliza os itens dentro do grid */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr 1fr)); /* Colunas dinâmicas para o PDF */
 }
 
 .etiqueta-box {
   width: 200px;
   height: 100px;
-  display: inline-block; /* Alinha os quadrados horizontalmente */
-  vertical-align: top; /* Alinha os quadrados no topo */
+  display: inline-block; /* Para garantir que as etiquetas fiquem lado a lado */
 }
 
 #etiqueta1,
-#etiqueta2,
-#etiqueta3,
-#etiqueta4,
-#etiqueta5,
-#etiqueta6,
-#etiqueta7,
-#etiqueta8,
-#etiqueta9,
-#etiqueta10 {
+#etiqueta2 {
   width: 200px;
   height: 100%;
 }
@@ -101,14 +91,12 @@ main {
   flex-direction: column;
 }
 
-.descricao select {
-  font-size: 16px; /* Ajuste o tamanho da fonte para ser consistente */
-  font-weight: bold;
-  height: 40px;
+.descricao input {
+  width: 50px;
   margin: 10px auto;
-  border: 3px solid #0069c5;
-  border-radius: 5px;
-  padding: 10px;
+  border: 3px solid #00427a;
+  padding: 0px 10px;
+  font-weight: 600;
 }
 
 .formulario label {
@@ -129,10 +117,10 @@ main {
 
 .descricao-etiqueta {
   position: absolute;
-  top: 10%;
-  left: 12%;
+  top: 15%;
+  left: 1;
   width: 300px;
-  font-size: 150px;
+  font-size: 180px;
   font-weight: 900;
   text-align: center;
 }
@@ -156,6 +144,7 @@ main {
 .formulario .previewEtiqueta img {
   width: 100%;
   margin-top: 1rem;
+  height: 300px;
   max-width: 400px;
 }
 
@@ -205,10 +194,6 @@ main {
   margin-bottom: 15px;
 }
 
-.previewA4 {
-  height: 100%;
-}
-
 .etiqueta-content {
   position: relative;
 }
@@ -219,10 +204,10 @@ main {
   color: red; /* Exemplo de cor do texto */
   border: none; /* Remover borda */
   position: absolute;
-  left: 88px;
-  top: -1px;
+  left: 75px;
+  top: 15px;
   cursor: pointer; /* Cursor pointer para indicar que é clicável */
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .etiqueta-content .delete-btn:hover {

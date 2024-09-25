@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const descricaoTexto = letraPrateleira.value.trim();
         descricaoEtiqueta.textContent = descricaoTexto || '';
         descricaoEtiqueta.style.display = descricaoTexto ? 'block' : 'none';
+    
+        // Para garantir que o layout não mude, você pode manter a altura da descrição estável.
+        descricaoEtiqueta.style.height = "100px"; // Ajuste conforme o tamanho do texto que você deseja
     };
+    
 
     const renderizarEtiquetas = () => {
         for (let i = 0; i < 10; i++) {
